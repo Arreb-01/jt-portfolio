@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="#ccff00"/>
+  <rect x="4" y="4" width="56" height="56" fill="#ccff00" stroke="#111" stroke-width="6"/>
+  <text x="11" y="45" font-family="Impact, Arial Black, sans-serif" font-size="34" font-weight="900" fill="#111">JT</text>
+</svg>

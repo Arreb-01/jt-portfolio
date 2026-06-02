@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 250" role="img" aria-labelledby="title desc">
+  <title id="title">Circuit hero learning game</title>
+  <desc id="desc">A cube character flying above circuit traces and torn red paper.</desc>
+  <defs>
+    <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="3" seed="9"/><feDisplacementMap in="SourceGraphic" scale="2"/></filter>
+  </defs>
+  <rect width="520" height="250" fill="#ff4fd8"/>
+  <path d="M0 165c100-32 203-33 300-5 73 22 141 28 220 8v82H0Z" fill="#fffef6" stroke="#111" stroke-width="4" filter="url(#rough)"/>
+  <path d="M286 152c33-46 103-80 175-50 33 14 57 35 80 62l-11 86H279Z" fill="#ff4b2b" filter="url(#rough)"/>
+  <g transform="translate(314 62) rotate(8)">
+    <path d="M0 38 55 0l80 27v92l-54 38L0 124Z" fill="#fff" stroke="#111" stroke-width="6"/>
+    <path d="M55 0v91L0 124M55 91l80 28" fill="none" stroke="#111" stroke-width="5"/>
+    <rect x="31" y="54" width="18" height="31" rx="8" fill="#111"/>
+    <rect x="81" y="54" width="18" height="31" rx="8" fill="#111"/>
+  </g>
+  <path d="M31 184h49l28-30h52l28-38h66m-224 51h80l24-25h54m-103 64h94l37-34h84" fill="none" stroke="#111" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="80" cy="184" r="6" fill="#fff133" stroke="#111" stroke-width="3"/>
+  <circle cx="188" cy="116" r="6" fill="#fff133" stroke="#111" stroke-width="3"/>
+  <circle cx="300" cy="172" r="6" fill="#fff133" stroke="#111" stroke-width="3"/>
+  <path d="m396 172 47 13-56 51z" fill="#165dff" stroke="#111" stroke-width="5"/>
+</svg>

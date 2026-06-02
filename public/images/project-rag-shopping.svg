@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 250" role="img" aria-labelledby="title desc">
+  <title id="title">RAG shopping guide</title>
+  <desc id="desc">A hand-drawn shopping cart with blue chat messages and product notes.</desc>
+  <defs>
+    <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="3" seed="15"/><feDisplacementMap in="SourceGraphic" scale="2"/></filter>
+  </defs>
+  <rect width="520" height="250" fill="#fff133"/>
+  <path d="M35 49 494 37 500 213 43 225Z" fill="#fffef6" stroke="#111" stroke-width="5" filter="url(#rough)"/>
+  <path d="M88 81h40l29 78h168l31-84" fill="none" stroke="#111" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M151 102h194M164 132h178M197 80v78M250 80v78M306 80v78" stroke="#111" stroke-width="4"/>
+  <path d="M213 96 255 77l49 27-56 36z" fill="#ff4fd8" stroke="#111" stroke-width="4"/>
+  <path d="M248 117 320 90l31 44-80 27z" fill="#165dff" stroke="#111" stroke-width="4"/>
+  <circle cx="180" cy="190" r="14" fill="#111"/><circle cx="310" cy="190" r="14" fill="#111"/>
+  <g transform="translate(348 57)">
+    <rect width="118" height="50" rx="10" fill="#165dff" stroke="#165dff" stroke-width="4"/>
+    <path d="M25 18h72M25 34h52" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(355 140)">
+    <path d="M0 0h105c15 0 23 8 23 21s-8 21-23 21H43L24 62l5-20H0Z" fill="#fff" stroke="#111" stroke-width="4"/>
+    <path d="M27 18h72M27 31h50" stroke="#111" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <path d="M73 39c33-28 66-28 99-4m-8 2 17 2-8-17" fill="none" stroke="#165dff" stroke-width="5" stroke-linecap="round"/>
+</svg>

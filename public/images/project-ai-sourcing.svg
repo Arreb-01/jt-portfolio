@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 250" role="img" aria-labelledby="title desc">
+  <title id="title">Supplier sourcing search</title>
+  <desc id="desc">A magnifying glass scanning hand-drawn profile cards and checkmarks.</desc>
+  <defs>
+    <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="3" seed="4"/><feDisplacementMap in="SourceGraphic" scale="2"/></filter>
+  </defs>
+  <rect width="520" height="250" fill="#77f7c4"/>
+  <path d="M28 54 494 31 503 214 38 225Z" fill="#fffef6" stroke="#111" stroke-width="5" filter="url(#rough)"/>
+  <g transform="translate(70 70) rotate(-4)">
+    <rect width="120" height="92" fill="#fff" stroke="#111" stroke-width="4"/>
+    <circle cx="42" cy="39" r="18" fill="#111"/>
+    <path d="M23 77c14-25 70-25 87 0" fill="#111"/>
+    <path d="M78 26h34M78 46h26M78 66h40" stroke="#111" stroke-width="4"/>
+  </g>
+  <g transform="translate(199 60) rotate(2)">
+    <rect width="145" height="105" fill="#fff" stroke="#ff4b2b" stroke-width="5"/>
+    <circle cx="55" cy="49" r="22" fill="#77f7c4"/>
+    <path d="M24 91c14-31 88-31 106 0" fill="#77f7c4"/>
+    <path d="M94 32h31M96 56h24" stroke="#111" stroke-width="4"/>
+  </g>
+  <g transform="translate(345 52) rotate(-3)">
+    <rect width="86" height="75" fill="#fff" stroke="#111" stroke-width="4"/>
+    <path d="m23 36 17 16 34-39" fill="none" stroke="#111" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="43" cy="103" r="12" fill="#ff4b2b"/>
+  </g>
+  <g transform="translate(214 90)">
+    <circle cx="0" cy="0" r="70" fill="none" stroke="#111" stroke-width="10"/>
+    <path d="m50 50 82 78" stroke="#111" stroke-width="13" stroke-linecap="round"/>
+  </g>
+</svg>

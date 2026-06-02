@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 250" role="img" aria-labelledby="title desc">
+  <title id="title">Incident response bot</title>
+  <desc id="desc">A hand-drawn bot with a chat bubble on torn paper and halftone dots.</desc>
+  <defs>
+    <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".04" numOctaves="3" seed="12"/><feDisplacementMap in="SourceGraphic" scale="2.5"/></filter>
+    <pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="3" fill="#d8d8d0"/></pattern>
+  </defs>
+  <rect width="520" height="250" fill="#165dff"/>
+  <path d="M26 76 500 49 488 212 37 226Z" fill="#fffef6" stroke="#111" stroke-width="5" filter="url(#rough)"/>
+  <path d="M256 83h230v126H256z" fill="url(#dots)"/>
+  <g transform="translate(92 89) rotate(-8)">
+    <rect x="0" y="42" width="142" height="86" rx="24" fill="#fff" stroke="#111" stroke-width="8"/>
+    <rect x="24" y="0" width="90" height="62" rx="18" fill="#fff" stroke="#111" stroke-width="8"/>
+    <rect x="32" y="80" width="17" height="34" rx="8" fill="#111"/>
+    <rect x="94" y="80" width="17" height="34" rx="8" fill="#111"/>
+    <path d="M52 145 23 186m95-39 38 35" stroke="#111" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(275 55) rotate(2)">
+    <path d="M0 0h158c18 0 30 12 30 30v43c0 18-12 30-30 30h-88l-31 28 8-28H0Z" fill="#fff" stroke="#111" stroke-width="7"/>
+    <circle cx="45" cy="52" r="10" fill="#111"/><circle cx="91" cy="52" r="10" fill="#111"/><circle cx="137" cy="52" r="10" fill="#111"/>
+  </g>
+  <g transform="translate(375 7) rotate(13)">
+    <path d="M0 0 72 13 48 82 24 58-7 64 14 38Z" fill="#fff133" stroke="#111" stroke-width="5"/>
+    <text x="11" y="45" font-family="Impact, Arial Black, sans-serif" font-size="26">NEW</text>
+  </g>
+</svg>

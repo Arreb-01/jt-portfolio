@@ -1,0 +1,6 @@
+/dist/
+/docs/
+/images/
+/node_modules/
+/*.log
+/jt-portfolio.pen

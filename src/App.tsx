@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   BrutalButton,
   FooterLinks,
@@ -5,16 +6,22 @@ import {
   SectionHeading,
   TopNav,
 } from "./components";
+import type { Language } from "./data/content";
+import { siteCopy } from "./data/content";
 import { aiProjects, mediaProjects, recognition, selectedWorks } from "./data/projects";
 
 export default function App() {
+  const [language, setLanguage] = useState<Language>("en");
+  const copy = siteCopy;
+  const toggleLanguage = () => setLanguage((current) => (current === "en" ? "zh" : "en"));
+
   return (
     <main id="top" className="site-shell">
-      <TopNav />
+      <TopNav copy={copy.nav} language={language} onToggleLanguage={toggleLanguage} />
 
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-note hero-note-pink">
-          Building ideas into real-world impact.
+          {copy.hero.note[language]}
           <ArrowDoodle />
         </div>
         <div className="hero-mark">
@@ -23,18 +30,25 @@ export default function App() {
         <div className="hero-copy">
           <p className="identity-label blue">AI Application Builder</p>
           <p className="identity-label yellow">Digital Media Technologist</p>
-          <p className="hero-subtitle">
-            我关注 AI 工具、交互系统与数据驱动的创意项目，把技术原型做成可使用、可展示、可迭代的作品。
-          </p>
-          <div className="hero-actions" aria-label="Primary actions">
-            <BrutalButton href="#selected-works" label="Selected Works" variant="paper" />
+          <p className="hero-subtitle">{copy.hero.subtitle[language]}</p>
+          <div className="hero-actions" aria-label={copy.hero.actionsLabel[language]}>
+            <BrutalButton
+              href="#selected-works"
+              label={copy.hero.selectedWorks[language]}
+              variant="paper"
+            />
             <BrutalButton
               href="https://github.com/Arreb-01"
-              label="GitHub"
+              label={copy.hero.github[language]}
               variant="mint"
               icon="github"
             />
-            <BrutalButton href="/JT-Resume.pdf" label="Resume PDF" variant="pink" icon="resume" />
+            <BrutalButton
+              href="/JT-Resume.pdf"
+              label={copy.hero.resume[language]}
+              variant="pink"
+              icon="resume"
+            />
           </div>
         </div>
         <div className="hero-collage" aria-hidden="true">
@@ -44,65 +58,83 @@ export default function App() {
 
       <section className="works-section" aria-labelledby="selected-works">
         <div className="section-topline">
-          <SectionHeading id="selected-works" title="Selected Works" label="Featured Projects" />
+          <SectionHeading
+            id="selected-works"
+            title={copy.sections.selectedWorks[language]}
+            label={copy.sections.featuredProjects[language]}
+          />
           <a
             className="small-action"
             href="https://github.com/Arreb-01?tab=repositories"
             target="_blank"
             rel="noreferrer"
           >
-            View All Works
+            {copy.sections.viewAllWorks[language]}
           </a>
         </div>
         <div className="featured-grid">
           {selectedWorks.map((project) => (
-            <ProjectCard project={project} featured key={project.caseNo} />
+            <ProjectCard
+              copy={copy.project}
+              language={language}
+              project={project}
+              featured
+              key={project.caseNo}
+            />
           ))}
         </div>
       </section>
 
       <section className="ai-section" aria-labelledby="ai-projects">
-        <SectionHeading id="ai-projects" title="AI & ML Projects" />
+        <SectionHeading id="ai-projects" title={copy.sections.aiProjects[language]} />
         <div className="compact-grid">
           {aiProjects.map((project) => (
-            <ProjectCard project={project} key={`${project.caseNo}-${project.title}`} />
+            <ProjectCard
+              copy={copy.project}
+              language={language}
+              project={project}
+              key={`${project.caseNo}-${project.title}`}
+            />
           ))}
         </div>
       </section>
 
       <section className="media-section" aria-labelledby="interactive-media">
         <div className="media-intro">
-          <h2 id="interactive-media">Interactive Media</h2>
-          <p>交互装置、教育游戏、数字体验与信息可视化。</p>
+          <h2 id="interactive-media">{copy.sections.media[language]}</h2>
+          <p>{copy.sections.mediaIntro[language]}</p>
         </div>
         <div className="media-list">
           {mediaProjects.map((project) => (
-            <ProjectCard project={project} key={`${project.caseNo}-${project.title}`} />
+            <ProjectCard
+              copy={copy.project}
+              language={language}
+              project={project}
+              key={`${project.caseNo}-${project.title}`}
+            />
           ))}
         </div>
       </section>
 
       <section id="research" className="research-section" aria-labelledby="recognition-title">
-        <SectionHeading id="recognition-title" title="Research & Recognition" />
+        <SectionHeading id="recognition-title" title={copy.sections.recognition[language]} />
         <div className="recognition-row">
           {recognition.map(([title, description], index) => (
             <article className={`recognition-card card-${index}`} key={title}>
               <h3>{title}</h3>
-              <p>{description}</p>
+              <p>{description[language]}</p>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="motion-notes" aria-label="Motion design notes">
-        <span>hover lift -4px / shadow +4px</span>
-        <span>button color inversion</span>
-        <span>stagger reveal</span>
-        <span>sticker micro-rotation</span>
-        <span>reduced-motion fallback</span>
+      <section className="motion-notes" aria-label={copy.motionNotes.label[language]}>
+        {copy.motionNotes.items[language].map((item) => (
+          <span key={item}>{item}</span>
+        ))}
       </section>
 
-      <FooterLinks />
+      <FooterLinks copy={copy.footer} language={language} />
     </main>
   );
 }

@@ -76,7 +76,8 @@ button:focus-visible {
 
 .nav-logo,
 .nav-arrow,
-.menu-button {
+.menu-button,
+.language-toggle {
   display: grid;
   place-items: center;
   border-right: var(--border);
@@ -84,6 +85,31 @@ button:focus-visible {
   font-size: 2.75rem;
   font-weight: 900;
   text-transform: uppercase;
+}
+
+.language-toggle {
+  align-self: center;
+  min-width: 76px;
+  min-height: 46px;
+  margin-right: 1rem;
+  border: 3px solid var(--ink);
+  background: var(--white);
+  box-shadow: 5px 5px 0 var(--ink);
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 1.15rem;
+  transition: transform var(--snap-fast), box-shadow var(--snap-fast), background var(--snap-fast);
+}
+
+.language-toggle:hover {
+  background: var(--yellow);
+  box-shadow: 8px 8px 0 var(--ink);
+  transform: translate(-3px, -3px);
+}
+
+.language-toggle:active {
+  box-shadow: 0 0 0 var(--ink);
+  transform: translate(5px, 5px);
 }
 
 .nav-logo {
@@ -887,7 +913,18 @@ button:focus-visible {
     display: none;
   }
 
+  .language-toggle {
+    grid-column: 2;
+    width: 64px;
+    min-width: 64px;
+    min-height: 42px;
+    margin-right: 0.75rem;
+    justify-self: end;
+    font-size: 1rem;
+  }
+
   .menu-button {
+    grid-column: 3;
     display: grid;
     width: 50px;
     height: 44px;

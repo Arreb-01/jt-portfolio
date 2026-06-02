@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { Language, LocalizedText } from "./data/content";
 import type { Project } from "./data/projects";
 
 export function ArrowIcon() {
@@ -34,7 +35,24 @@ function HandmadeIcon({ name }: { name: "github" | "resume" | "menu" }) {
   );
 }
 
-export function TopNav() {
+export function TopNav({
+  copy,
+  language,
+  onToggleLanguage,
+}: {
+  copy: {
+    works: LocalizedText;
+    research: LocalizedText;
+    links: LocalizedText;
+    openMenu: LocalizedText;
+    closeMenu: LocalizedText;
+    jumpLinks: LocalizedText;
+    toggleLanguage: LocalizedText;
+    toggleLabel: LocalizedText;
+  };
+  language: Language;
+  onToggleLanguage: () => void;
+}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -43,21 +61,29 @@ export function TopNav() {
         JT
       </a>
       <nav aria-label="Primary navigation" className="nav-links">
-        <a href="#selected-works">Works</a>
-        <a href="#research">Research</a>
-        <a href="#links">Links</a>
+        <a href="#selected-works">{copy.works[language]}</a>
+        <a href="#research">{copy.research[language]}</a>
+        <a href="#links">{copy.links[language]}</a>
       </nav>
+      <button
+        className="language-toggle"
+        type="button"
+        aria-label={copy.toggleLabel[language]}
+        onClick={onToggleLanguage}
+      >
+        {copy.toggleLanguage[language]}
+      </button>
       <button
         className={`menu-button ${isMenuOpen ? "open" : ""}`}
         type="button"
-        aria-label={isMenuOpen ? "Close navigation" : "Open navigation"}
+        aria-label={isMenuOpen ? copy.closeMenu[language] : copy.openMenu[language]}
         aria-expanded={isMenuOpen}
         aria-controls="mobile-navigation"
         onClick={() => setIsMenuOpen((current) => !current)}
       >
         <HandmadeIcon name="menu" />
       </button>
-      <a className="nav-arrow" href="#links" aria-label="Jump to links">
+      <a className="nav-arrow" href="#links" aria-label={copy.jumpLinks[language]}>
         ↗
       </a>
       <nav
@@ -66,13 +92,13 @@ export function TopNav() {
         className={`mobile-nav ${isMenuOpen ? "open" : ""}`}
       >
         <a href="#selected-works" onClick={() => setIsMenuOpen(false)}>
-          Works
+          {copy.works[language]}
         </a>
         <a href="#research" onClick={() => setIsMenuOpen(false)}>
-          Research
+          {copy.research[language]}
         </a>
         <a href="#links" onClick={() => setIsMenuOpen(false)}>
-          Links
+          {copy.links[language]}
         </a>
       </nav>
     </header>
@@ -133,7 +159,22 @@ export function SectionHeading({
   );
 }
 
-export function ProjectCard({ project, featured = false }: { project: Project; featured?: boolean }) {
+export function ProjectCard({
+  project,
+  language,
+  copy,
+  featured = false,
+}: {
+  project: Project;
+  language: Language;
+  copy: {
+    position: LocalizedText;
+    build: LocalizedText;
+    caseNote: LocalizedText;
+    stackLabel: LocalizedText;
+  };
+  featured?: boolean;
+}) {
   return (
     <article className={`project-card accent-${project.accent} ${featured ? "featured" : ""}`}>
       <div className="project-visual">
@@ -146,14 +187,14 @@ export function ProjectCard({ project, featured = false }: { project: Project; f
       </div>
       <div className="project-body">
         <p className="project-description">
-          <span>POSITION</span>
-          {project.description}
+          <span>{copy.position[language]}</span>
+          {project.description[language]}
         </p>
         <p className="project-role">
-          <span>BUILD</span>
-          {project.role}
+          <span>{copy.build[language]}</span>
+          {project.role[language]}
         </p>
-        <ul aria-label={`${project.title} technology stack`}>
+        <ul aria-label={`${project.title} ${copy.stackLabel[language]}`}>
           {project.stack.map((item) => (
             <li key={item}>{item}</li>
           ))}
@@ -168,23 +209,35 @@ export function ProjectCard({ project, featured = false }: { project: Project; f
             GitHub <ArrowIcon />
           </a>
         ) : (
-          <span className="project-link-muted">Case note <ArrowIcon /></span>
+          <span className="project-link-muted">
+            {copy.caseNote[language]} <ArrowIcon />
+          </span>
         )}
       </div>
     </article>
   );
 }
 
-export function FooterLinks() {
+export function FooterLinks({
+  copy,
+  language,
+}: {
+  copy: {
+    statement: LocalizedText;
+    github: LocalizedText;
+    resume: LocalizedText;
+  };
+  language: Language;
+}) {
   return (
     <footer id="links" className="footer">
-      <p>Open to creative AI tools, interactive media, and product prototypes.</p>
+      <p>{copy.statement[language]}</p>
       <div className="footer-actions">
         <a href="https://github.com/Arreb-01" target="_blank" rel="noreferrer">
-          <HandmadeIcon name="github" /> GitHub
+          <HandmadeIcon name="github" /> {copy.github[language]}
         </a>
         <a href="/JT-Resume.pdf">
-          <HandmadeIcon name="resume" /> Resume PDF
+          <HandmadeIcon name="resume" /> {copy.resume[language]}
         </a>
       </div>
     </footer>

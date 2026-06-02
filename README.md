@@ -7,7 +7,7 @@ Live site: [jt-portfolio-snowy.vercel.app](https://jt-portfolio-snowy.vercel.app
 ## Highlights
 
 - Neo-brutalist visual system with hard black borders, solid color blocks, and physical button feedback.
-- English section titles with Chinese project descriptions.
+- English-first content with a one-click Chinese language switch.
 - Responsive desktop and mobile layouts.
 - Public resume link served from `public/JT-Resume.pdf`.
 - Generated SVG artwork for the hero board and project cards.

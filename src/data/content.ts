@@ -2,6 +2,11 @@ export type Language = "en" | "zh";
 
 export type LocalizedText = Record<Language, string>;
 
+export const resumeLinks: Record<Language, string> = {
+  en: "/CV_Ma_Jiatong.pdf",
+  zh: "/Ma-Jiatong-Resume-ZH.pdf",
+};
+
 export const siteCopy = {
   nav: {
     works: { en: "Works", zh: "Works" },
@@ -28,7 +33,7 @@ export const siteCopy = {
     actionsLabel: { en: "Primary actions", zh: "Primary actions" },
     selectedWorks: { en: "Selected Works", zh: "Selected Works" },
     github: { en: "GitHub", zh: "GitHub" },
-    resume: { en: "Resume PDF", zh: "Resume PDF" },
+    resume: { en: "Resume PDF", zh: "中文简历 PDF" },
   },
   sections: {
     selectedWorks: { en: "Selected Works", zh: "Selected Works" },
@@ -73,6 +78,6 @@ export const siteCopy = {
       zh: "Open to creative AI tools, interactive media, and product prototypes.",
     },
     github: { en: "GitHub", zh: "GitHub" },
-    resume: { en: "Resume PDF", zh: "Resume PDF" },
+    resume: { en: "Resume PDF", zh: "中文简历 PDF" },
   },
 } as const;

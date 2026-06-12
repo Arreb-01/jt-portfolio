@@ -7,12 +7,13 @@ import {
   TopNav,
 } from "./components";
 import type { Language } from "./data/content";
-import { siteCopy } from "./data/content";
+import { resumeLinks, siteCopy } from "./data/content";
 import { aiProjects, mediaProjects, recognition, selectedWorks } from "./data/projects";
 
 export default function App() {
   const [language, setLanguage] = useState<Language>("en");
   const copy = siteCopy;
+  const resumeHref = resumeLinks[language];
   const toggleLanguage = () => setLanguage((current) => (current === "en" ? "zh" : "en"));
 
   return (
@@ -44,7 +45,7 @@ export default function App() {
               icon="github"
             />
             <BrutalButton
-              href="/JT-Resume.pdf"
+              href={resumeHref}
               label={copy.hero.resume[language]}
               variant="pink"
               icon="resume"
@@ -134,7 +135,7 @@ export default function App() {
         ))}
       </section>
 
-      <FooterLinks copy={copy.footer} language={language} />
+      <FooterLinks copy={copy.footer} language={language} resumeHref={resumeHref} />
     </main>
   );
 }

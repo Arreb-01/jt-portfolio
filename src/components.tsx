@@ -221,6 +221,7 @@ export function ProjectCard({
 export function FooterLinks({
   copy,
   language,
+  resumeHref,
 }: {
   copy: {
     statement: LocalizedText;
@@ -228,6 +229,7 @@ export function FooterLinks({
     resume: LocalizedText;
   };
   language: Language;
+  resumeHref: string;
 }) {
   return (
     <footer id="links" className="footer">
@@ -236,7 +238,7 @@ export function FooterLinks({
         <a href="https://github.com/Arreb-01" target="_blank" rel="noreferrer">
           <HandmadeIcon name="github" /> {copy.github[language]}
         </a>
-        <a href="/JT-Resume.pdf">
+        <a href={resumeHref}>
           <HandmadeIcon name="resume" /> {copy.resume[language]}
         </a>
       </div>

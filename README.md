@@ -16,7 +16,7 @@ The default language is English. A one-click language switch restores the origin
 - Responsive desktop and mobile experience.
 - English-first content with a one-click Chinese mixed-language mode.
 - Project cards for selected works, AI/ML projects, and interactive media.
-- Public resume link served from `public/JT-Resume.pdf`.
+- Language-aware resume links served from `public/CV_Ma_Jiatong.pdf` and `public/Ma-Jiatong-Resume-ZH.pdf`.
 - Handmade SVG visuals for the hero board and project cards.
 - Production QA workflow with unit tests, Vite production build, and local `dist` preview.
 
@@ -77,7 +77,7 @@ Recommended manual QA:
 - Verify the default page is English.
 - Click the language switch and confirm the mixed Chinese version.
 - Check desktop and mobile layouts for horizontal overflow.
-- Confirm `/JT-Resume.pdf` opens correctly.
+- Confirm `/CV_Ma_Jiatong.pdf` opens in English mode and `/Ma-Jiatong-Resume-ZH.pdf` opens in Chinese mode.
 - Confirm GitHub and project links work.
 - Confirm all SVG assets load without 404 errors.
 
@@ -93,7 +93,8 @@ src/
   styles.css
   test/
 public/
-  JT-Resume.pdf
+  CV_Ma_Jiatong.pdf
+  Ma-Jiatong-Resume-ZH.pdf
   favicon.svg
   images/
 ```

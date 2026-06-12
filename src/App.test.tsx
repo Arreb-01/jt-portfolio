@@ -23,7 +23,12 @@ describe("JT portfolio", () => {
     expect(screen.getByText(/我关注 AI 工具、交互系统与数据驱动的创意项目/)).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Selected Works" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Interactive Media" })).toBeInTheDocument();
-    expect(screen.getAllByRole("link", { name: /Resume PDF/i }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole("link", { name: /中文简历 PDF/i }).length).toBeGreaterThan(0);
+    expect(
+      screen
+        .getAllByRole("link", { name: /中文简历 PDF/i })
+        .every((link) => link.getAttribute("href") === "/Ma-Jiatong-Resume-ZH.pdf"),
+    ).toBe(true);
     expect(screen.getByRole("button", { name: "切换语言为英文" })).toBeInTheDocument();
   });
 
@@ -42,7 +47,7 @@ describe("JT portfolio", () => {
     expect(
       screen
         .getAllByRole("link", { name: /Resume PDF/i })
-        .some((link) => link.getAttribute("href") === "/JT-Resume.pdf"),
+        .every((link) => link.getAttribute("href") === "/CV_Ma_Jiatong.pdf"),
     ).toBe(true);
   });
 

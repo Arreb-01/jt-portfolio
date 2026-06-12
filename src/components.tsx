@@ -1,14 +1,6 @@
-import { useEffect, useState } from "react";
-import type {
-  Language,
-  LocalizedText,
-  PortfolioMode,
-  ProjectFilter,
-  siteCopy,
-} from "./data/content";
+import { useState } from "react";
+import type { Language, LocalizedText } from "./data/content";
 import type { Project } from "./data/projects";
-
-type SiteCopy = typeof siteCopy;
 
 export function ArrowIcon() {
   return (
@@ -18,7 +10,7 @@ export function ArrowIcon() {
   );
 }
 
-function HandmadeIcon({ name }: { name: "github" | "resume" | "menu" | "close" }) {
+function HandmadeIcon({ name }: { name: "github" | "resume" | "menu" }) {
   if (name === "github") {
     return (
       <svg className="hand-icon github-mark" aria-hidden="true" viewBox="0 0 32 32">
@@ -36,14 +28,6 @@ function HandmadeIcon({ name }: { name: "github" | "resume" | "menu" | "close" }
     );
   }
 
-  if (name === "close") {
-    return (
-      <svg className="hand-icon" aria-hidden="true" viewBox="0 0 32 32">
-        <path d="M8 8l16 16M24 8 8 24" />
-      </svg>
-    );
-  }
-
   return (
     <svg className="hand-icon" aria-hidden="true" viewBox="0 0 32 32">
       <path d="M6 9h20M6 16h20M6 23h20" />
@@ -51,31 +35,25 @@ function HandmadeIcon({ name }: { name: "github" | "resume" | "menu" | "close" }
   );
 }
 
-export function ScrollProgress({ progress }: { progress: number }) {
-  return (
-    <div className="scroll-progress" aria-hidden="true">
-      <span style={{ transform: `scaleX(${progress})` }} />
-    </div>
-  );
-}
-
 export function TopNav({
   copy,
   language,
   onToggleLanguage,
-  activeSection,
 }: {
-  copy: SiteCopy["nav"];
+  copy: {
+    works: LocalizedText;
+    research: LocalizedText;
+    links: LocalizedText;
+    openMenu: LocalizedText;
+    closeMenu: LocalizedText;
+    jumpLinks: LocalizedText;
+    toggleLanguage: LocalizedText;
+    toggleLabel: LocalizedText;
+  };
   language: Language;
   onToggleLanguage: () => void;
-  activeSection: string;
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const links = [
-    { id: "selected-works", href: "#selected-works", label: copy.works[language] },
-    { id: "research", href: "#research", label: copy.research[language] },
-    { id: "links", href: "#links", label: copy.links[language] },
-  ];
 
   return (
     <header className="top-nav">
@@ -83,15 +61,9 @@ export function TopNav({
         JT
       </a>
       <nav aria-label="Primary navigation" className="nav-links">
-        {links.map((link) => (
-          <a
-            href={link.href}
-            aria-current={activeSection === link.id ? "page" : undefined}
-            key={link.id}
-          >
-            {link.label}
-          </a>
-        ))}
+        <a href="#selected-works">{copy.works[language]}</a>
+        <a href="#research">{copy.research[language]}</a>
+        <a href="#links">{copy.links[language]}</a>
       </nav>
       <button
         className="language-toggle"
@@ -117,81 +89,19 @@ export function TopNav({
       <nav
         id="mobile-navigation"
         aria-label="Mobile navigation"
-        aria-hidden={!isMenuOpen}
         className={`mobile-nav ${isMenuOpen ? "open" : ""}`}
       >
-        {links.map((link) => (
-          <a
-            href={link.href}
-            aria-current={activeSection === link.id ? "page" : undefined}
-            key={link.id}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            {link.label}
-          </a>
-        ))}
+        <a href="#selected-works" onClick={() => setIsMenuOpen(false)}>
+          {copy.works[language]}
+        </a>
+        <a href="#research" onClick={() => setIsMenuOpen(false)}>
+          {copy.research[language]}
+        </a>
+        <a href="#links" onClick={() => setIsMenuOpen(false)}>
+          {copy.links[language]}
+        </a>
       </nav>
     </header>
-  );
-}
-
-export function ModeSwitcher({
-  modes,
-  copy,
-  language,
-  activeMode,
-  onChange,
-}: {
-  modes: readonly PortfolioMode[];
-  copy: SiteCopy["modes"];
-  language: Language;
-  activeMode: PortfolioMode;
-  onChange: (mode: PortfolioMode) => void;
-}) {
-  return (
-    <div className="mode-switcher" aria-label="Lab mode selector">
-      {modes.map((mode) => (
-        <button
-          type="button"
-          className={activeMode === mode ? "active" : ""}
-          aria-pressed={activeMode === mode}
-          onClick={() => onChange(mode)}
-          key={mode}
-        >
-          <span>{copy[mode].label[language]}</span>
-        </button>
-      ))}
-    </div>
-  );
-}
-
-export function ProjectFilterBar({
-  filters,
-  copy,
-  language,
-  activeFilter,
-  onChange,
-}: {
-  filters: readonly ProjectFilter[];
-  copy: SiteCopy["filters"];
-  language: Language;
-  activeFilter: ProjectFilter;
-  onChange: (filter: ProjectFilter) => void;
-}) {
-  return (
-    <div className="filter-bar" aria-label="Project filters">
-      {filters.map((filter) => (
-        <button
-          type="button"
-          className={activeFilter === filter ? "active" : ""}
-          aria-pressed={activeFilter === filter}
-          onClick={() => onChange(filter)}
-          key={filter}
-        >
-          {copy[filter][language]}
-        </button>
-      ))}
-    </div>
   );
 }
 
@@ -254,39 +164,19 @@ export function ProjectCard({
   language,
   copy,
   featured = false,
-  expanded,
-  onToggle,
-  onOpenCaseFile,
 }: {
   project: Project;
   language: Language;
-  copy: SiteCopy["project"];
+  copy: {
+    position: LocalizedText;
+    build: LocalizedText;
+    caseNote: LocalizedText;
+    stackLabel: LocalizedText;
+  };
   featured?: boolean;
-  expanded: boolean;
-  onToggle: () => void;
-  onOpenCaseFile: () => void;
 }) {
-  const toggleLabel =
-    language === "en"
-      ? `${expanded ? copy.collapse.en : copy.expand.en} ${featured ? "featured " : ""}${
-          project.title
-        }`
-      : `${copy[expanded ? "collapse" : "expand"].zh}${featured ? "精选 " : " "}${
-          project.title
-        }`;
-  const caseFileLabel =
-    language === "en"
-      ? `Open ${featured ? "featured " : ""}${project.title} case file`
-      : `打开${featured ? "精选 " : " "}${project.title} 案例档案`;
-
   return (
-    <article
-      className={`project-card accent-${project.accent} ${featured ? "featured" : ""} ${
-        expanded ? "expanded" : ""
-      }`}
-      aria-label={`${featured ? "featured " : ""}${project.title} project card`}
-      data-featured={featured ? "true" : undefined}
-    >
+    <article className={`project-card accent-${project.accent} ${featured ? "featured" : ""}`}>
       <div className="project-visual">
         <div className="project-title-block">
           <p className="case-number">CASE {project.caseNo}</p>
@@ -304,135 +194,27 @@ export function ProjectCard({
           <span>{copy.build[language]}</span>
           {project.role[language]}
         </p>
-        <div className="project-tags" aria-label={`${project.title} ${copy.tags[language]}`}>
-          {project.tags.map((tag) => (
-            <span key={tag}>{tag}</span>
-          ))}
-        </div>
-        {expanded ? (
-          <div className="project-details">
-            <DetailLine label={copy.problem[language]} text={project.problem[language]} />
-            <DetailLine label={copy.built[language]} text={project.built[language]} />
-            <DetailLine label={copy.impact[language]} text={project.impact[language]} />
-          </div>
-        ) : null}
         <ul aria-label={`${project.title} ${copy.stackLabel[language]}`}>
           {project.stack.map((item) => (
             <li key={item}>{item}</li>
           ))}
         </ul>
-        <div className="project-actions">
-          <button
-            type="button"
-            className="project-inline-button"
-            aria-expanded={expanded}
-            onClick={onToggle}
+        {project.github ? (
+          <a
+            href={project.github}
+            aria-label={`${project.title} GitHub`}
+            target="_blank"
+            rel="noreferrer"
           >
-            {toggleLabel} <ArrowIcon />
-          </button>
-          {project.caseFile ? (
-            <button type="button" className="project-inline-button case" onClick={onOpenCaseFile}>
-              {caseFileLabel} <ArrowIcon />
-            </button>
-          ) : project.github ? (
-            <a
-              href={project.github}
-              aria-label={`${project.title} GitHub`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              GitHub <ArrowIcon />
-            </a>
-          ) : (
-            <span className="project-link-muted">
-              {copy.caseNote[language]} <ArrowIcon />
-            </span>
-          )}
-        </div>
+            GitHub <ArrowIcon />
+          </a>
+        ) : (
+          <span className="project-link-muted">
+            {copy.caseNote[language]} <ArrowIcon />
+          </span>
+        )}
       </div>
     </article>
-  );
-}
-
-function DetailLine({ label, text }: { label: string; text: string }) {
-  return (
-    <div>
-      <strong>{label}</strong>
-      <p>{text}</p>
-    </div>
-  );
-}
-
-export function CaseFileDrawer({
-  project,
-  copy,
-  language,
-  onClose,
-}: {
-  project: Project | null;
-  copy: SiteCopy["caseFile"];
-  language: Language;
-  onClose: () => void;
-}) {
-  useEffect(() => {
-    if (!project) {
-      return undefined;
-    }
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        onClose();
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [onClose, project]);
-
-  if (!project?.caseFile) {
-    return null;
-  }
-
-  const sections: [LocalizedText, LocalizedText][] = [
-    [copy.background, project.caseFile.background],
-    [copy.role, project.caseFile.role],
-    [copy.method, project.caseFile.method],
-    [copy.result, project.caseFile.result],
-  ];
-
-  return (
-    <div className="case-file-backdrop">
-      <aside
-        className="case-file-drawer"
-        role="dialog"
-        aria-modal="true"
-        aria-label={`${project.title} case file`}
-      >
-        <div className="case-file-top">
-          <div>
-            <span>{copy.title[language]}</span>
-            <h2>{project.title}</h2>
-          </div>
-          <button type="button" aria-label={copy.close[language]} onClick={onClose}>
-            <HandmadeIcon name="close" />
-          </button>
-        </div>
-        <p className="case-file-summary">{project.caseFile.summary[language]}</p>
-        <div className="case-file-sections">
-          {sections.map(([label, text]) => (
-            <section key={label.en}>
-              <h3>{label[language]}</h3>
-              <p>{text[language]}</p>
-            </section>
-          ))}
-        </div>
-        {project.github ? (
-          <a className="case-file-link" href={project.github} target="_blank" rel="noreferrer">
-            {copy.links[language]} <ArrowIcon />
-          </a>
-        ) : null}
-      </aside>
-    </div>
   );
 }
 
@@ -441,7 +223,11 @@ export function FooterLinks({
   language,
   resumeHref,
 }: {
-  copy: SiteCopy["footer"];
+  copy: {
+    statement: LocalizedText;
+    github: LocalizedText;
+    resume: LocalizedText;
+  };
   language: Language;
   resumeHref: string;
 }) {

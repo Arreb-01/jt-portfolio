@@ -13,11 +13,24 @@
   --snap: #ccff00;
   --snap-pink: #ff006e;
   --snap-fast: 150ms ease-out;
+  --mode-accent: var(--blue);
   color: var(--ink);
   background: var(--paper);
   font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", Arial, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+}
+
+.mode-ai-product {
+  --mode-accent: var(--blue);
+}
+
+.mode-creative-tech {
+  --mode-accent: var(--pink);
+}
+
+.mode-research {
+  --mode-accent: var(--red);
 }
 
 * {
@@ -56,6 +69,26 @@ button:focus-visible {
   overflow-x: hidden;
   border-left: var(--border);
   border-right: var(--border);
+}
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: 7px;
+  border-bottom: 2px solid var(--ink);
+  background: var(--paper);
+  transform: translateZ(0);
+}
+
+.scroll-progress span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--mode-accent);
+  transform-origin: left center;
 }
 
 .top-nav {
@@ -163,6 +196,15 @@ button:focus-visible {
   transform: scaleX(1);
 }
 
+.nav-links a[aria-current="page"]::after,
+.mobile-nav a[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+.nav-links a[aria-current="page"] {
+  color: var(--mode-accent);
+}
+
 .menu-button {
   display: none;
   border: var(--border);
@@ -177,7 +219,7 @@ button:focus-visible {
   grid-template-columns: minmax(260px, 31vw) minmax(720px, 1fr);
   column-gap: clamp(1rem, 2.4vw, 2.75rem);
   align-items: center;
-  min-height: 620px;
+  min-height: 700px;
   padding: clamp(2.5rem, 5vw, 4.5rem);
   border-bottom: var(--border);
   background: var(--paper);
@@ -257,6 +299,115 @@ button:focus-visible {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.35rem;
   margin-top: 0.8rem;
+}
+
+.lab-console {
+  position: relative;
+  width: min(100%, 780px);
+  border: var(--border);
+  box-shadow: var(--shadow-large);
+  background: var(--white);
+  padding: 1.15rem;
+  transform: rotate(0.7deg);
+}
+
+.lab-console::before {
+  position: absolute;
+  top: -18px;
+  right: 1.1rem;
+  content: "MODE";
+  border: 3px solid var(--ink);
+  background: var(--mode-accent);
+  color: var(--white);
+  padding: 0.18rem 0.75rem;
+  font-family: "Courier New", monospace;
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+.lab-console h2 {
+  margin: 0;
+  font-family: Impact, "Arial Black", "Anton", sans-serif;
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.lab-console p {
+  margin: 0.65rem 0;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.lab-console > span {
+  display: inline-flex;
+  border: 2px solid var(--ink);
+  background: var(--yellow);
+  padding: 0.35rem 0.55rem;
+  font-family: "Courier New", monospace;
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.console-kicker {
+  display: inline-block;
+  margin: 0 0 0.6rem !important;
+  border: 2px solid var(--ink);
+  background: var(--ink);
+  color: var(--white);
+  padding: 0.25rem 0.55rem;
+  font-family: "Courier New", monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0;
+}
+
+.mode-switcher,
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.mode-switcher {
+  margin-top: 0.9rem;
+}
+
+.mode-switcher button,
+.filter-bar button,
+.project-inline-button,
+.case-file-top button {
+  border: 3px solid var(--ink);
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  cursor: pointer;
+  font-family: Impact, "Arial Black", "Anton", sans-serif;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  transition: transform var(--snap-fast), box-shadow var(--snap-fast), background var(--snap-fast);
+}
+
+.mode-switcher button,
+.filter-bar button {
+  min-height: 42px;
+  padding: 0.55rem 0.85rem;
+}
+
+.mode-switcher button.active,
+.filter-bar button.active {
+  background: var(--mode-accent);
+  color: var(--white);
+  transform: translate(-3px, -3px);
+  box-shadow: 7px 7px 0 var(--ink);
+}
+
+.mode-switcher button:hover,
+.filter-bar button:hover,
+.project-inline-button:hover,
+.case-file-top button:hover {
+  background: var(--yellow);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink);
 }
 
 .brutal-button {
@@ -657,6 +808,57 @@ button:focus-visible {
   font-weight: 900;
 }
 
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.project-tags span {
+  border: 2px solid var(--ink);
+  background: var(--yellow);
+  padding: 0.2rem 0.45rem;
+  font-family: "Courier New", monospace;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.project-details {
+  display: grid;
+  gap: 0.65rem;
+  border: 3px solid var(--ink);
+  background: var(--paper);
+  padding: 0.85rem;
+}
+
+.project-details div {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.project-details strong {
+  display: inline-flex;
+  width: max-content;
+  border: 2px solid var(--ink);
+  background: var(--ink);
+  color: var(--white);
+  padding: 0.15rem 0.35rem;
+  font-family: "Courier New", monospace;
+  font-size: 0.72rem;
+  line-height: 1;
+}
+
+.project-details p {
+  font-size: 0.95rem;
+}
+
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 0.2rem;
+}
+
 .project-body a,
 .project-link-muted {
   display: inline-flex;
@@ -665,6 +867,21 @@ button:focus-visible {
   margin-top: 0.2rem;
   font-family: Impact, "Arial Black", "Anton", sans-serif;
   text-transform: uppercase;
+}
+
+.project-inline-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 36px;
+  padding: 0.45rem 0.65rem;
+  font-size: 0.82rem;
+}
+
+.project-inline-button.case {
+  background: var(--mode-accent);
+  color: var(--white);
 }
 
 .project-body svg,
@@ -683,6 +900,15 @@ button:focus-visible {
 
 .ai-section .section-heading {
   margin-bottom: 2rem;
+}
+
+.lab-topline {
+  align-items: flex-start;
+}
+
+.filter-bar {
+  max-width: 720px;
+  justify-content: flex-end;
 }
 
 .ai-section .section-heading h2 {
@@ -781,7 +1007,7 @@ button:focus-visible {
   color: var(--white);
 }
 
-.motion-notes {
+.lab-principles {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 1rem;
@@ -789,7 +1015,7 @@ button:focus-visible {
   background: var(--paper);
 }
 
-.motion-notes span {
+.lab-principles span {
   display: grid;
   min-height: 46px;
   place-items: center;
@@ -800,6 +1026,128 @@ button:focus-visible {
   font-size: 0.75rem;
   font-weight: 900;
   text-align: center;
+}
+
+.lab-principles span:nth-child(2) {
+  background: var(--mint);
+}
+
+.lab-principles span:nth-child(3) {
+  background: var(--yellow);
+}
+
+.lab-principles span:nth-child(4) {
+  background: var(--pink);
+  color: var(--white);
+}
+
+.case-file-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  justify-content: flex-end;
+  background: rgba(17, 17, 17, 0.42);
+}
+
+.case-file-drawer {
+  width: min(560px, calc(100vw - 24px));
+  height: 100%;
+  border-left: var(--border);
+  background: var(--paper);
+  box-shadow: -10px 0 0 var(--ink);
+  padding: 1.25rem;
+  overflow-y: auto;
+  animation: drawer-in 190ms steps(3, end) both;
+}
+
+.case-file-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 3px solid var(--ink);
+  padding-bottom: 1rem;
+}
+
+.case-file-top span {
+  display: inline-flex;
+  border: 2px solid var(--ink);
+  background: var(--mode-accent);
+  color: var(--white);
+  padding: 0.25rem 0.55rem;
+  font-family: "Courier New", monospace;
+  font-size: 0.82rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.case-file-top h2 {
+  margin: 0.45rem 0 0;
+  font-family: Impact, "Arial Black", "Anton", sans-serif;
+  font-size: clamp(2.2rem, 6vw, 4.2rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.case-file-top button {
+  display: grid;
+  width: 48px;
+  height: 44px;
+  place-items: center;
+  padding: 0;
+}
+
+.case-file-summary {
+  border: var(--border);
+  box-shadow: var(--shadow);
+  background: var(--white);
+  padding: 1rem;
+  font-size: 1.08rem;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.case-file-sections {
+  display: grid;
+  gap: 1rem;
+}
+
+.case-file-sections section {
+  border: 3px solid var(--ink);
+  background: var(--white);
+  padding: 0.9rem;
+}
+
+.case-file-sections h3 {
+  display: inline-flex;
+  margin: 0 0 0.45rem;
+  border: 2px solid var(--ink);
+  background: var(--yellow);
+  padding: 0.2rem 0.45rem;
+  font-family: "Courier New", monospace;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.case-file-sections p {
+  margin: 0;
+  font-weight: 720;
+  line-height: 1.45;
+}
+
+.case-file-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1rem;
+  border: var(--border);
+  background: var(--ink);
+  color: var(--white);
+  box-shadow: var(--shadow);
+  padding: 0.8rem 1rem;
+  font-family: Impact, "Arial Black", "Anton", sans-serif;
+  text-transform: uppercase;
 }
 
 .footer {
@@ -870,6 +1218,15 @@ button:focus-visible {
   }
   50% {
     transform: rotate(1deg) translate(-4px, 3px);
+  }
+}
+
+@keyframes drawer-in {
+  from {
+    opacity: 0.65;
+  }
+  to {
+    opacity: 1;
   }
 }
 
@@ -1005,6 +1362,23 @@ button:focus-visible {
     overflow-wrap: break-word;
   }
 
+  .lab-console {
+    width: calc(100% - 16px);
+    padding: 1rem;
+    transform: none;
+  }
+
+  .lab-console h2 {
+    font-size: clamp(2rem, 11vw, 3rem);
+  }
+
+  .mode-switcher,
+  .filter-bar {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
   .hero-actions {
     width: 100%;
     grid-template-columns: 1fr;
@@ -1028,6 +1402,10 @@ button:focus-visible {
   .footer {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .filter-bar {
+    max-width: 100%;
   }
 
   .section-heading h2,
@@ -1076,6 +1454,14 @@ button:focus-visible {
     display: none;
   }
 
+  .project-actions {
+    flex-direction: column;
+  }
+
+  .project-inline-button {
+    width: 100%;
+  }
+
   .media-section {
     grid-template-columns: 1fr;
   }
@@ -1088,8 +1474,20 @@ button:focus-visible {
     display: flex;
   }
 
-  .motion-notes {
+  .lab-principles {
     grid-template-columns: 1fr;
+  }
+
+  .case-file-backdrop {
+    align-items: flex-end;
+  }
+
+  .case-file-drawer {
+    width: 100%;
+    height: min(92vh, 760px);
+    border-top: var(--border);
+    border-left: 0;
+    box-shadow: 0 -8px 0 var(--ink);
   }
 
   .footer-actions {
